@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My experiment</title>
+    <script src="jspsych.js"></script>
+    <script src="http://requirejs.org/docs/release/2.1.5/comments/require.js"></script>
+    <script type="text/javascript" src="seq_003.json"></script>
+    <script src="plugins/jspsych-image-button-response.js"></script>
+    <script src="plugins/jspsych-image-keyboard-response.js"></script>
+    <script src="plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="plugins/jspsych-html-button-response.js"></script>
+    <script src="plugins/jspsych-instructions.js"></script>
+    <script src="plugins/jspsych-survey-html-form.js"></script>
+    <script src="plugins/jspsych-survey-multi-choice.js"></script>
+    <script src="plugins/jspsych-fullscreen.js"></script>
+    <script src="plugins/jspsych-image-slider-response.js"></script>
+    <script src="plugins/jspsych-preload.js"></script>
+    <script src="plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="plugins/jspsych-iat-image.js"></script>
+    <script src="plugins/jspsych-preload.js"></script>
+    <script src="test.js"></script>
+    <script src="seq1.js"></script>
+    <link href="css/jspsych.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>First Try</h1>
+    <p>this is my first page u will see Miracle here.</p>
+    <p class="current_node"></p>
+    <style>
+      img {
+        width: auto;
+        border-radius: 10px;
+      }
+      .current_node {
+        width: 0fr;
+        float: left;
+      }
+    </style>
+  </body>
+  <script>
+    function stim_load()
+    {
+      
+    }
+
+    var welcome_trial = {
+      type: "html-keyboard-response",
+      stimulus: "Hello world!",
+    };
+    var Graph = [
+      { name: "a", image: "examples/img/a.png" },
+      { name: "b", image: "examples/img/b.png" },
+      { name: "c", image: "examples/img/c.png" },
+      { name: "d", image: "examples/img/d.png" },
+      { name: "e", image: "examples/img/e.png" },
+      { name: "f", image: "examples/img/f.png" },
+      { name: "g", image: "examples/img/g.png" },
+      { name: "h", image: "examples/img/h.png" },
+      { name: "i", image: "examples/img/i.png" },
+      { name: "j", image: "examples/img/j.png" },
+      { name: "k", image: "examples/img/k.png" },
+      { name: "l", image: "examples/img/l.png" },
+      { name: "m", image: "examples/img/m.png" },
+      { name: "n", image: "examples/img/n.png" },
+      { name: "o", image: "examples/img/o.png" },
+    ];
+    // var test = {
+    //   timeline: [image_button_trial],
+    //   timeline_variables: test_stumili,
+    //   // data: {
+    //   //   phase: 'test'
+    //   // },
+    //   randomize_order: true
+    // }
+
+    var image_button_trial = {
+      type: "html-button-response",
+      //stimulus: ["examples/img/a.png", "examples/img/b.png"],
+
+      stimulus: function () {
+        fetch("sequences/seq_" + Math.floor(Math.random() * 100) + ".json")
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (obj) {
+            // console.log(obj[0][0]);
+            for (let block = 0; block < obj.length; block++) {
+              for (let trial = 0; trial < obj[block].length; trial++) {
+                console.log(
+                  "trial " + obj[block][trial] + " corr " + obj[block][trial][5]
+                );
+              }
+            }
+            
+          });
+        return `<table><tr>
+                  
+                 <td><img src="${obj[block][trial][1]}"></td>
+                 <td><img src="${Graph[2].image}"></td>
+                 <td><img src="${Graph[3].image}"></td>
+                 <td><img src="${Graph[4].image}"></td>
+                </tr></table>`;
+      },
+      choices: ["a", "b", "c"],
+
+      prompt: "Check the correct neighbor",
+      trial_duration: 1000000,
+    };
+
+    jsPsych.init({
+      timeline: [welcome_trial, image_button_trial],
+      on_finish: function () {
+        jsPsych.data.displayData();
+      },
+    });
+  </script>
+</html>

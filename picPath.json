@@ -1,0 +1,21 @@
+const{
+"a" : ["examples/img/a.png"],
+"b" : ["examples/img/b.png"],
+"c" : ["examples/img/c.png"],
+"d" : ["examples/img/d.png"],
+"e" : ["examples/img/e.png"],
+"f" : ["examples/img/f.png"],
+"g" : ["examples/img/g.png"],
+"h" : ["examples/img/h.png"],
+"i" : ["examples/img/i.png"],
+"j" : ["examples/img/j.png"],
+"k" : ["examples/img/k.png"],
+"l" : ["examples/img/l.png"],
+"m" : ["examples/img/m.png"],
+"n" : ["examples/img/n.png"],
+"o" : ["examples/img/o.png"]
+    
+}
+<td><img src="${Graph[2].image}"></td>
+<td><img src="${Graph[3].image}"></td>
+<td><img src="${Graph[4].image}"></td>

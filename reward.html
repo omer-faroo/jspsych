@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My experiment</title>
+    <script src="jspsych.js"></script>
+    <script src="http://requirejs.org/docs/release/2.1.5/comments/require.js"></script>
+    <script type="text/javascript" src="seq_003.json"></script>
+    <script src="plugins/jspsych-image-button-response.js"></script>
+    <script src="plugins/jspsych-image-keyboard-response.js"></script>
+    <script src="plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="plugins/jspsych-html-button-response.js"></script>
+    <script src="plugins/jspsych-instructions.js"></script>
+    <script src="plugins/jspsych-survey-html-form.js"></script>
+    <script src="plugins/jspsych-survey-multi-choice.js"></script>
+    <script src="plugins/jspsych-fullscreen.js"></script>
+    <script src="plugins/jspsych-image-slider-response.js"></script>
+    <script src="plugins/jspsych-preload.js"></script>
+    <script src="plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="plugins/jspsych-iat-image.js"></script>
+    <script src="plugins/jspsych-preload.js"></script>
+    <script src="test.js"></script>
+    <script src="seq1.js"></script>
+    <link href="css/jspsych.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>First Try</h1>
+    <p>this is my first page u will see Miracle here.</p>
+    <p class="current_node"></p>
+    <style>
+      img {
+        width: auto;
+        border-radius: 10px;
+      }
+      .current_node {
+        width: 0fr;
+        float: left;
+      }
+    </style>
+  </body>
+  <script>
+     function stim_load() {
+      // funcition for getting the start_node which is returned after function ends
+       var trial = [];
+            // console.log(obj[0][0]);
+            for (let block = 0; block < test_stumili.length; block++) {
+              
+              for (let trial = 0; trial < test_stumili[block].length; trial++) {
+                console.log("trial " + test_stumili[block][trial][0]);
+              } 
+              //trial.push(test_stumili[block][trial]);
+               // console.log("here "+ test_stumili[block][trial]);
+               //trial.push(test_stumili[block][trial]);
+            } 
+            
+          // return `<table><tr>
+                  
+          //         <td><img src="${Graph['b']}"></td>
+                  
+          //        </tr></table>`;
+          console.log(trial);
+          return trial;
+    }
+    
+
+    var welcome_trial = {
+      type: "html-keyboard-response",
+      stimulus: "Hello world!",
+    };
+    var Graph = {
+      a: "examples/img/a.png",
+      b: "examples/img/b.png",
+      c: "examples/img/c.png",
+      d: "examples/img/d.png",
+      e: "examples/img/e.png",
+      f: "examples/img/f.png",
+      g: "examples/img/g.png",
+      h: "examples/img/h.png",
+      i: "examples/img/i.png",
+      j: "examples/img/j.png",
+      k: "examples/img/k.png",
+      l: "examples/img/l.png",
+      m: "examples/img/m.png",
+      n: "examples/img/n.png",
+      o: "examples/img/o.png",
+    };
+
+    // var test = {
+    //   timeline: [image_button_trial],
+    //   timeline_variables: test_stumili,
+    //   // data: {
+    //   //   phase: 'test'
+    //   // },
+    //   randomize_order: true
+    // }
+
+    var image_button_trial = {
+      type: "html-button-response",
+      //stimulus: ["examples/img/a.png", "examples/img/b.png"],
+
+      stimulus: function () {
+       
+            
+          return `<table><tr>
+                  
+                  <td><img src="${Graph[stim_load()]}"></td>
+                  
+                 </tr></table>`;
+      },
+      choices: ["a", "b", "c"],
+
+      prompt: "Check the correct neighbor",
+      trial_duration: 1000000,
+    };
+
+    jsPsych.init({
+      timeline: [welcome_trial, image_button_trial],
+      on_finish: function () {
+        jsPsych.data.displayData();
+      },
+    });
+  </script>
+</html>
